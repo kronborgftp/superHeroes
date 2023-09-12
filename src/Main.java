@@ -16,6 +16,7 @@ public class Main {
 
         int choice = 0;
 
+        //loops around until the user chooses to exit the program.
         while (choice != 3) {
 
             System.out.println("1. Add superhero \n" +
@@ -24,7 +25,7 @@ public class Main {
 
             choice = keyboard.nextInt();
 
-            //loops around until the user chooses to exit the program.
+
             // Using a "Switch Case" instead of while loop.
             switch (choice) {
                 case 1:
