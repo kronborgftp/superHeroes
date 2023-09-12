@@ -16,14 +16,15 @@ public class Main {
 
         int choice = 0;
 
-        System.out.println("1. Add superhero \n" +
-                "2. Show list of superheroes \n" +
-                "3. Exit the program");
+        while (choice != 3) {
 
-        choice = keyboard.nextInt();
+            System.out.println("1. Add superhero \n" +
+                    "2. Show list of superheroes \n" +
+                    "3. Exit the program");
 
-        //loops around until the user chooses to exit the program.
+            choice = keyboard.nextInt();
 
+            //loops around until the user chooses to exit the program.
             // Using a "Switch Case" instead of while loop.
             switch (choice) {
                 case 1:
@@ -68,7 +69,11 @@ public class Main {
 
                 default:
                     System.out.println("Please choose one of the option listed above.");
+                    do {
+                        choice = keyboard.nextInt();
+                    } while (choice < 1 || choice > 3);
                     break;
             }
         }
+    }
 }
