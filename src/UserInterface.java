@@ -14,12 +14,13 @@ public class UserInterface {
         int choice = 0;
 
         //loops around until the user chooses to exit the program.
-        while (choice != 4) {
+        while (choice != 5) {
 
             System.out.println("1. Add superhero \n" +
                     "2. Show list of superheroes \n" +
                     "3. Search for a superhero \n" +
-                    "4. Exit the program");
+                    "4. Edit existing superheroes \n" +
+                    "5. Exit the program");
 
             choice = keyboard.nextInt();
 
@@ -69,18 +70,43 @@ public class UserInterface {
 
                     List<Superhero> matchingSuperheroes = database.searchSuperheroes(userSearchCriteria);
 
+                    //Switched for each loop out for a normal for loop to display index of the superheroes.
                     if(!matchingSuperheroes.isEmpty()) {
                         System.out.println("Superhero(s) found: ");
-                        for (Superhero superhero : matchingSuperheroes) {
-                            System.out.println(superhero);
+                        for (int i = 0; i < matchingSuperheroes.size(); i++) {
+                            Superhero superhero = matchingSuperheroes.get(i);
+                            if (superhero != null) {
+                                System.out.println(i + ". " + superhero.getName());
+                            }
+                        }
+
+                        System.out.println("Enter the number of the superhero you want to view: ");
+                        int userSuperheroInt = keyboard.nextInt();
+
+                        //checking if userSuperheroInt is within the range (greater than or equal to 0 and less than the number of matching superheroes)
+                        if (userSuperheroInt >= 0 && userSuperheroInt < matchingSuperheroes.size()) {
+                            //if the index is valid we retrieve the data from matchingSuperheroes
+                            Superhero selectedSuperhero = matchingSuperheroes.get(userSuperheroInt);
+                            if (selectedSuperhero != null) {
+                                System.out.println("Superhero Details: ");
+                                System.out.println(selectedSuperhero);
+                            } else {
+                                System.out.println("Superhero not found");
+                            }
+                        } else {
+                            System.out.println("Invalid number. Please enter a valid number.");
                         }
                     } else {
-                        System.out.println("No matching superhero found");
+                        System.out.println("No matching superhero found.");
                     }
                     break;
 
-                //allows the user to exit the program
                 case 4:
+                    System.out.println("yo");
+                    break;
+
+                //allows the user to exit the program
+                case 5:
                     System.out.println("Have a nice day.");
                     break;
 
@@ -88,7 +114,7 @@ public class UserInterface {
                     System.out.println("Please choose one of the option listed above.");
                     do {
                         choice = keyboard.nextInt();
-                    } while (choice < 1 || choice > 4);
+                    } while (choice < 1 || choice > 5);
                     break;
             }
         }
