@@ -75,9 +75,7 @@ public class UserInterface {
                         System.out.println("Superhero(s) found: ");
                         for (int i = 0; i < matchingSuperheroes.size(); i++) {
                             Superhero superhero = matchingSuperheroes.get(i);
-                            if (superhero != null) {
                                 System.out.println(i + ". " + superhero.getName());
-                            }
                         }
 
                         System.out.println("Enter the number of the superhero you want to view: ");
@@ -102,7 +100,9 @@ public class UserInterface {
                     break;
 
                 case 4:
-                    System.out.println("yo");
+                    //edit existing superhero
+                    database.editSuperhero();
+
                     break;
 
                 //allows the user to exit the program
