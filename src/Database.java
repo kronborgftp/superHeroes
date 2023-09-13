@@ -15,4 +15,15 @@ public class Database {
     public List<Superhero> getAllSuperheroes() {
         return superheroList;
     }
+    public List<Superhero> searchSuperheroes(String userSearchCriteria) {
+        List<Superhero> matchingSuperheroes = new ArrayList<>();
+
+        for (Superhero superhero : getAllSuperheroes()) {
+            if(superhero != null && superhero.getName().toLowerCase().contains(userSearchCriteria)) {
+                matchingSuperheroes.add(superhero);
+            }
+        }
+
+        return matchingSuperheroes;
+    }
 }

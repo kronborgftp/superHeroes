@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Controller {
@@ -15,4 +16,6 @@ public class Controller {
     public List<Superhero> getAllSuperheroes() {
         return database.getAllSuperheroes();
     }
+
+
 }
