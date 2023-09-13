@@ -17,11 +17,12 @@ public class Main {
         int choice = 0;
 
         //loops around until the user chooses to exit the program.
-        while (choice != 3) {
+        while (choice != 4) {
 
             System.out.println("1. Add superhero \n" +
                     "2. Show list of superheroes \n" +
-                    "3. Exit the program");
+                    "3. Search for a superhero \n" +
+                    "4. Exit the program");
 
             choice = keyboard.nextInt();
 
@@ -63,8 +64,26 @@ public class Main {
                     }
                     break;
 
-                //allows the user to exit the program
+
                 case 3:
+                    System.out.println("Type the superhero name or part of the name of your superhero: ");
+                    keyboard.nextLine();
+                    String userSearchCriteria = keyboard.nextLine().toLowerCase();
+
+                    List<Superhero> matchingSuperheroes = database.searchSuperheroes(userSearchCriteria);
+
+                    if(!matchingSuperheroes.isEmpty()) {
+                        System.out.println("Superhero(s) found: ");
+                        for (Superhero superhero : matchingSuperheroes) {
+                            System.out.println(superhero);
+                        }
+                    } else {
+                        System.out.println("No matching superhero found");
+                    }
+                    break;
+
+                //allows the user to exit the program
+                case 4:
                     System.out.println("Have a nice day.");
                     break;
 
@@ -72,7 +91,7 @@ public class Main {
                     System.out.println("Please choose one of the option listed above.");
                     do {
                         choice = keyboard.nextInt();
-                    } while (choice < 1 || choice > 3);
+                    } while (choice < 1 || choice > 4);
                     break;
             }
         }

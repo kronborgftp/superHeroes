@@ -15,6 +15,10 @@ public class Superhero {
         this.strength = strength;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     public String toString() {
 
         return "Name: " + name + ". Real name: " + realName + ". Superpower: " + superPower + ". Year created: " + yearCreated + ". Strength in numbers: " + strength + ". Is the super hero human?: " + isHuman;
