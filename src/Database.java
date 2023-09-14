@@ -54,13 +54,14 @@ public class Database {
                 Superhero editSuperhero = matchingSuperheroes.get(editSuperheroIndex);
 
                 System.out.println("Editing superhero: " + editSuperhero.getName());
-                System.out.println("Choose an attribute to edit:");
-                System.out.println("1. Name");
-                System.out.println("2. Real Name");
-                System.out.println("3. Superpower");
-                System.out.println("4. Year Created");
-                System.out.println("5. Human Status");
-                System.out.println("6. Strength");
+                System.out.println(("""
+                    Choose an attribute to edit: \s
+                    1. Name\s
+                    2. Real name\s
+                    3. Superpower\s
+                    4. Year Created\s
+                    5. Human or not\s
+                    6. Strength number"""));
 
                 int attributeChoice = keyboard.nextInt();
                 keyboard.nextLine();

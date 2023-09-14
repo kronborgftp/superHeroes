@@ -16,11 +16,12 @@ public class UserInterface {
         //loops around until the user chooses to exit the program.
         while (choice != 5) {
 
-            System.out.println("1. Add superhero \n" +
-                    "2. Show list of superheroes \n" +
-                    "3. Search for a superhero \n" +
-                    "4. Edit existing superheroes \n" +
-                    "5. Exit the program");
+            System.out.println("""
+                    1. Add superhero\s
+                    2. Show list of superheroes\s
+                    3. Search for a superhero\s
+                    4. Edit existing superheroes\s
+                    5. Exit the program""");
 
             choice = keyboard.nextInt();
 
