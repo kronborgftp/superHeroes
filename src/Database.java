@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Locale;
+import java.util.*;
 
 public class Database {
     Scanner keyboard = new Scanner(System.in).useLocale(Locale.UK);
@@ -46,12 +43,12 @@ public class Database {
                 System.out.println(i + ". " + superhero.getName());
             }
 
-            System.out.println("Enter the index of the superhero you want to edit: ");
-            int editSuperheroIndex = keyboard.nextInt();
+            System.out.println("Enter the number of the superhero you want to edit: ");
+            int editSuperheroNumber = getIntInput();
             keyboard.nextLine();
 
-            if (editSuperheroIndex >= 0 && editSuperheroIndex < matchingSuperheroes.size()) {
-                Superhero editSuperhero = matchingSuperheroes.get(editSuperheroIndex);
+            if (editSuperheroNumber >= 0 && editSuperheroNumber < matchingSuperheroes.size()) {
+                Superhero editSuperhero = matchingSuperheroes.get(editSuperheroNumber);
 
                 System.out.println("Editing superhero: " + editSuperhero.getName());
                 System.out.println(("""
@@ -63,7 +60,7 @@ public class Database {
                     5. Human or not\s
                     6. Strength number"""));
 
-                int attributeChoice = keyboard.nextInt();
+                int attributeChoice = getIntInput();
                 keyboard.nextLine();
 
                 switch (attributeChoice) {
@@ -84,17 +81,17 @@ public class Database {
                         break;
                     case 4:
                         System.out.println("Enter the new year the superhero was created: ");
-                        int newYearCreated = keyboard.nextInt();
+                        int newYearCreated = getIntInput();
                         editSuperhero.setYearCreated(newYearCreated);
                         break;
                     case 5:
                         System.out.println("Is the superhero human? (true/false): ");
-                        boolean newIsHuman = keyboard.nextBoolean();
+                        boolean newIsHuman = getBooleanInput();
                         editSuperhero.setIsHuman(newIsHuman);
                         break;
                     case 6:
                         System.out.println("Enter the new strength of the superhero in numbers: ");
-                        double newStrength = keyboard.nextDouble();
+                        double newStrength = getDoubleInput();
                         editSuperhero.setStrength(newStrength);
                         break;
                     default:
@@ -110,4 +107,38 @@ public class Database {
             System.out.println("No matching superhero found for editing.");
         }
     }
+
+    private int getIntInput() {
+        while (true) {
+            try {
+                return keyboard.nextInt();
+            } catch (java.util.InputMismatchException e) {
+                System.out.println("Invalid input. Please enter an integer/whole number. ");
+                keyboard.nextLine();
+            }
+        }
+    }
+
+
+    private double getDoubleInput() {
+        while (true) {
+            try {
+                return keyboard.nextDouble();
+            } catch (java.util.InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a number");
+                keyboard.nextLine();
+            }
+        }
+    }
+    private boolean getBooleanInput() {
+        while (true) {
+            String input = keyboard.nextLine().toLowerCase();
+            if (input.equals("true") || input.equals("false")) {
+                return Boolean.parseBoolean(input);
+            } else {
+                System.out.println("Invalid input. Please enter either 'true' or 'false': ");
+            }
+        }
+    }
+
 }
