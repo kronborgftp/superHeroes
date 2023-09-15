@@ -137,7 +137,6 @@ public class UserInterface {
         }
     }
 
-
     private double getDoubleInput() {
         while (true) {
             try {

@@ -9,6 +9,7 @@ public class Database {
         superheroList = new ArrayList<>();
 
     }
+
     public void addSuperhero(Superhero superhero) {
         superheroList.add(superhero);
     }
@@ -16,11 +17,12 @@ public class Database {
     public List<Superhero> getAllSuperheroes() {
         return superheroList;
     }
+
     public List<Superhero> searchSuperheroes(String userSearchCriteria) {
         List<Superhero> matchingSuperheroes = new ArrayList<>();
 
         for (Superhero superhero : getAllSuperheroes()) {
-            if(superhero != null && superhero.getName().toLowerCase().contains(userSearchCriteria)) {
+            if (superhero != null && superhero.getName().toLowerCase().contains(userSearchCriteria)) {
                 matchingSuperheroes.add(superhero);
             }
         }
@@ -52,13 +54,13 @@ public class Database {
 
                 System.out.println("Editing superhero: " + editSuperhero.getName());
                 System.out.println(("""
-                    Choose an attribute to edit: \s
-                    1. Name\s
-                    2. Real name\s
-                    3. Superpower\s
-                    4. Year Created\s
-                    5. Human or not\s
-                    6. Strength number"""));
+                        Choose an attribute to edit: \s
+                        1. Name\s
+                        2. Real name\s
+                        3. Superpower\s
+                        4. Year Created\s
+                        5. Human or not\s
+                        6. Strength number"""));
 
                 int attributeChoice = getIntInput();
                 keyboard.nextLine();
@@ -119,7 +121,6 @@ public class Database {
         }
     }
 
-
     private double getDoubleInput() {
         while (true) {
             try {
@@ -130,6 +131,7 @@ public class Database {
             }
         }
     }
+
     private boolean getBooleanInput() {
         while (true) {
             String input = keyboard.nextLine().toLowerCase();

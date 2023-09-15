@@ -22,18 +22,23 @@ public class Superhero {
     public void setName(String name) {
         this.name = name;
     }
+
     public void setRealName(String realName) {
         this.realName = realName;
     }
+
     public void setSuperpower(String superPower) {
         this.superPower = superPower;
     }
+
     public void setYearCreated(int yearCreated) {
         this.yearCreated = yearCreated;
     }
+
     public void setIsHuman(boolean isHuman) {
         this.isHuman = isHuman;
     }
+
     public void setStrength(double strength) {
         this.strength = strength;
     }
