@@ -126,7 +126,7 @@ public class UserInterface {
     }
 
     private int getIntInput() {
-        //while loop for asking the user repeatedly to type the correct thing
+        //while loop for asking the user repeatedly to type the correct thing (if they didn't)
         while (true) {
             try {
                 return keyboard.nextInt();
