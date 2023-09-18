@@ -4,7 +4,7 @@ public class Main {
     private Controller controller;
 
     public static void main(String[] args) {
-        UserInterface ui = new UserInterface();
+        UserInterface ui = new UserInterface(System.in);
         ui.startProgram();
     }
 }
