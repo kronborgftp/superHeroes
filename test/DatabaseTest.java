@@ -74,7 +74,6 @@ class DatabaseTest {
         Superhero editedSuperman = new Superhero("Superman", "Kal-El", "Flight and Laser Vision", 1938, false, 95);
 
         // Redirect input for testing purposes (simulate user input)
-        // You can use a library like System Rules to do this more cleanly.
         System.setIn(new ByteArrayInputStream("2\nKal-El\n3\nFlight and Laser Vision\n4\n1938\n5\nfalse\n6\n95\n".getBytes()));
 
         // Call the editSuperhero method
