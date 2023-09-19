@@ -17,14 +17,15 @@ public class UserInterface {
         int choice = 0;
 
         //loops around until the user chooses to exit the program.
-        while (choice != 5) {
+        while (choice != 6) {
 
             System.out.println("""
                     1. Add superhero\s
                     2. Show list of superheroes\s
                     3. Search for a superhero\s
                     4. Edit existing superheroes\s
-                    5. Exit the program""");
+                    5. Remove superhero \s
+                    6. Exit the program""");
 
             choice = getIntInput();
 
@@ -110,8 +111,12 @@ public class UserInterface {
                     database.editSuperhero();
                     break;
 
-                //allows the user to exit the program
                 case 5:
+                    database.removeSuperhero();
+                    break;
+
+                //allows the user to exit the program
+                case 6:
                     System.out.println("Have a nice day.");
                     break;
 
@@ -119,7 +124,7 @@ public class UserInterface {
                     System.out.println("Please choose one of the option listed above.");
                     do {
                         choice = getIntInput();
-                    } while (choice < 1 || choice > 5);
+                    } while (choice < 1 || choice > 6);
                     break;
             }
         }

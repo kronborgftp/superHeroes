@@ -110,6 +110,39 @@ public class Database {
         }
     }
 
+    public void removeSuperhero() {
+        System.out.println("Type the superhero name or part of the name of your superhero that you want to remove: ");
+        String userSearchCriteria = keyboard.nextLine().toLowerCase();
+
+
+        List<Superhero> matchingSuperheroes = searchSuperheroes(userSearchCriteria);
+
+        if (!matchingSuperheroes.isEmpty()) {
+            System.out.println("Superhero(s) found: ");
+            for (int i = 0; i < matchingSuperheroes.size(); i++) {
+                Superhero superhero = matchingSuperheroes.get(i);
+                System.out.println(i + ". " + superhero.getName());
+            }
+
+            System.out.println("Enter the number of the superhero you want to remove: ");
+            int userSuperheroInt = keyboard.nextInt();
+            keyboard.nextLine();
+
+            if (userSuperheroInt >= 0 && userSuperheroInt < matchingSuperheroes.size()) {
+                // Remove the selected superhero by index
+                Superhero removedSuperhero = matchingSuperheroes.remove(userSuperheroInt);
+
+                // You can optionally display a message with the removed superhero's name
+                System.out.println("Superhero " + removedSuperhero.getName() + " removed.");
+            } else {
+                System.out.println("Invalid superhero number.");
+            }
+        } else {
+            System.out.println("No matching superheroes found.");
+        }
+    }
+
+
     private int getIntInput() {
         while (true) {
             try {
