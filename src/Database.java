@@ -130,10 +130,13 @@ public class Database {
 
             if (userSuperheroInt >= 0 && userSuperheroInt < matchingSuperheroes.size()) {
                 // Remove the selected superhero by index
-                Superhero removedSuperhero = matchingSuperheroes.remove(userSuperheroInt);
-
-                // You can optionally display a message with the removed superhero's name
-                System.out.println("Superhero " + removedSuperhero.getName() + " removed.");
+                Superhero superheroToRemove = matchingSuperheroes.get(userSuperheroInt);
+                if (superheroToRemove.getName().toLowerCase().contains(userSearchCriteria)) {
+                    matchingSuperheroes.remove(superheroToRemove);
+                    System.out.println("Superhero removed");
+                } else {
+                    System.out.println("The selected superhero does not match the search criteria");
+                }
             } else {
                 System.out.println("Invalid superhero number.");
             }

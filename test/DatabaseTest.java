@@ -76,4 +76,9 @@ class DatabaseTest {
         assertEquals(editedSpiderman, superheroes.get(2));
     }
 
+    @Test
+    void removeSuperhero() {
+
+    }
+
 }
