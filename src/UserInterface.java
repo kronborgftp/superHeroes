@@ -16,10 +16,10 @@ public class UserInterface {
             System.out.println("""
                     1. Add superhero
                     2. Show list of superheroes
-                    3. Search for a superhero
-                    4. Edit existing superheroes
-                    5. Remove superhero
-                    6. Show all superheroes sorted
+                    3. Show all superheroes sorted
+                    4. Search for a superhero
+                    5. Edit a superhero
+                    6. Remove a superhero
                     7. Exit the program""");
 
             choice = getIntInput();
@@ -32,14 +32,18 @@ public class UserInterface {
                     showSuperheroList(controller);
                     break;
                 case 3:
-                    userSearchSuperhero(database);
+                    showSuperheroListSorted(controller);
                     break;
                 case 4:
-                    database.editSuperhero();
+                    userSearchSuperhero(database);
                     break;
                 case 5:
+                    database.editSuperhero();
+                    break;
+                case 6:
                     database.removeSuperhero();
                     break;
+
                 case 7:
                     System.out.println("Have a nice day.");
                     break;
@@ -81,6 +85,20 @@ public class UserInterface {
     }
 
     public void showSuperheroList(Controller controller){
+        List<Superhero> superheroList = controller.getAllSuperheroes();
+
+        //Sort the superheroes by name
+        Collections.sort(superheroList, (s1, s2) -> s1.getName().compareToIgnoreCase(s2.getName()));
+
+        System.out.println("All the amazing superheroes: ");
+        for (Superhero superhero : superheroList) {
+            if (superhero != null) {
+                System.out.println(superhero);
+            }
+        }
+    }
+
+    public void showSuperheroListSorted(Controller controller) {
         List<Superhero> superheroList = controller.getAllSuperheroes();
 
         //Sort the superheroes by name

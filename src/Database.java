@@ -140,7 +140,6 @@ public class Database {
         System.out.println("Type the superhero name or part of the name of your superhero that you want to remove: ");
         String userSearchCriteria = keyboard.nextLine().toLowerCase();
 
-
         List<Superhero> matchingSuperheroes = searchSuperheroes(userSearchCriteria);
 
         if (!matchingSuperheroes.isEmpty()) {
@@ -151,13 +150,13 @@ public class Database {
             }
 
             System.out.println("Enter the number of the superhero you want to remove: ");
-            int userSuperheroInt = keyboard.nextInt();
+            int userSuperheroInt = getIntInput();
             keyboard.nextLine();
 
             if (userSuperheroInt >= 0 && userSuperheroInt < matchingSuperheroes.size()) {
                 // Remove the selected superhero by index
                 Superhero superheroToRemove = matchingSuperheroes.get(userSuperheroInt);
-                if (superheroToRemove.getName().toLowerCase().contains(userSearchCriteria)) {
+                if (superheroToRemove.getName().equals(userSearchCriteria)) {
                     matchingSuperheroes.remove(superheroToRemove);
                     System.out.println("Superhero removed");
                 } else {
@@ -170,6 +169,7 @@ public class Database {
             System.out.println("No matching superheroes found.");
         }
     }
+
 
 
     private int getIntInput() {
