@@ -1,7 +1,5 @@
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Locale;
-import java.util.Scanner;
+import java.util.*;
+
 
 public class UserInterface {
     private final Scanner keyboard = new Scanner(System.in).useLocale(Locale.UK);
@@ -84,6 +82,10 @@ public class UserInterface {
 
     public void showSuperheroList(Controller controller){
         List<Superhero> superheroList = controller.getAllSuperheroes();
+
+        //Sort the superheroes by name
+        Collections.sort(superheroList, (s1, s2) -> s1.getName().compareToIgnoreCase(s2.getName()));
+
         System.out.println("All the amazing superheroes: ");
         for (Superhero superhero : superheroList) {
             if (superhero != null) {
