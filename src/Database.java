@@ -4,17 +4,24 @@ import java.util.*;
 
 public class Database {
     Scanner keyboard = new Scanner(System.in).useLocale(Locale.UK);
-
     private List<Superhero> superheroList;
+    private boolean dataChanged;
 
     public Database() {
         superheroList = new ArrayList<>();
-
+        dataChanged = false;
     }
 
     public void saveSuperheroesToFile(String fileName) {
+        if (!dataChanged) {
+            System.out.println("No changes to data. Not saving to file.");
+            return;
+        }
+
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName))) {
             oos.writeObject(superheroList);
+            System.out.println("Superheroes saved to file.");
+            dataChanged = false; // Reset the flag after saving
         } catch (IOException e) {
             System.out.println("Error saving superheroes to file " + e.getMessage());
         }
@@ -30,6 +37,7 @@ public class Database {
 
     public void addSuperhero(Superhero superhero) {
         superheroList.add(superhero);
+        dataChanged = true;
     }
 
     public List<Superhero> getAllSuperheroes() {
