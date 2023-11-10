@@ -1,7 +1,7 @@
 import java.util.List;
 
-public class Controller {
-    private Database database;
+class Controller {
+    private final Database database;
 
     public Controller(Database database) {
         this.database = database;

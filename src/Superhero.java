@@ -1,4 +1,6 @@
-public class Superhero {
+import java.io.Serializable;
+
+public class Superhero implements Serializable {
     private String name;
     private String realName;
     private String superPower;

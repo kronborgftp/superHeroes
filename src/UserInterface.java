@@ -4,72 +4,56 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class UserInterface {
-    Scanner keyboard = new Scanner(System.in).useLocale(Locale.UK);
+    private final Scanner keyboard = new Scanner(System.in).useLocale(Locale.UK);
+
+    private final Database database = new Database();
+    private final Controller controller = new Controller(database);
 
     public void startProgram() {
+        int choice;
 
-
-        Database database = new Database();
-        Controller controller = new Controller(database);
-
-        System.out.println("-------Welcome to the SUPERHERO UNIVERSE------");
-
-        int choice = 0;
-
-        //loops around until the user chooses to exit the program.
-        while (choice != 6) {
-
+        database.loadSuperHeroesFromFile("superheroes.txt");
+        do {
+            System.out.println("-------Welcome to the SUPERHERO UNIVERSE------");
             System.out.println("""
-                    1. Add superhero\s
-                    2. Show list of superheroes\s
-                    3. Search for a superhero\s
-                    4. Edit existing superheroes\s
-                    5. Remove superhero \s
-                    6. Exit the program""");
+                    1. Add superhero
+                    2. Show list of superheroes
+                    3. Search for a superhero
+                    4. Edit existing superheroes
+                    5. Remove superhero
+                    6. Show all superheroes sorted
+                    7. Exit the program""");
 
             choice = getIntInput();
 
-
-            // Using a "Switch Case" instead of while loop.
             switch (choice) {
                 case 1:
                     userAddSuperhero(controller);
                     break;
-
                 case 2:
-                    //Allows the user to display a list of the superheroes, without adding any
                     showSuperheroList(controller);
                     break;
-
-
                 case 3:
                     userSearchSuperhero(database);
                     break;
-
                 case 4:
-                    //edit existing superhero
                     database.editSuperhero();
                     break;
-
                 case 5:
                     database.removeSuperhero();
                     break;
-
-                //allows the user to exit the program
-                case 6:
+                case 7:
                     System.out.println("Have a nice day.");
                     break;
-
                 default:
-                    System.out.println("Please choose one of the option listed above.");
-                    do {
-                        choice = getIntInput();
-                    } while (choice < 1 || choice > 6);
+                    System.out.println("Please choose one of the options listed above.");
                     break;
             }
-        }
-    }
 
+        } while (choice != 7);
+
+        database.saveSuperheroesToFile("superheroes.txt");
+    }
 
     public void userAddSuperhero(Controller controller) {
         System.out.println("Add superhero by typing its superhero name: ");
@@ -145,13 +129,12 @@ public class UserInterface {
     }
 
     private int getIntInput() {
-        //while loop for asking the user repeatedly to type the correct thing (if they didn't)
         while (true) {
             try {
                 return keyboard.nextInt();
-            } catch (java.util.InputMismatchException e) {
+            } catch (InputMismatchException e) {
                 System.out.println("Invalid input. Please enter an integer/whole number.");
-                keyboard.nextLine();
+                keyboard.nextLine(); // consume the invalid input
             }
         }
     }

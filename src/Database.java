@@ -1,3 +1,5 @@
+
+import java.io.*;
 import java.util.*;
 
 public class Database {
@@ -8,6 +10,22 @@ public class Database {
     public Database() {
         superheroList = new ArrayList<>();
 
+    }
+
+    public void saveSuperheroesToFile(String fileName) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName))) {
+            oos.writeObject(superheroList);
+        } catch (IOException e) {
+            System.out.println("Error saving superheroes to file " + e.getMessage());
+        }
+    }
+
+    public void loadSuperHeroesFromFile(String fileName) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName))) {
+            superheroList = (List<Superhero>) ois.readObject();
+        }catch (IOException | ClassNotFoundException e) {
+            System.out.println("Error loading superheroes from file: " + e.getMessage());
+        }
     }
 
     public void addSuperhero(Superhero superhero) {
