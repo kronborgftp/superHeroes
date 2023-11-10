@@ -1,6 +1,11 @@
+import java.io.Serial;
 import java.io.Serializable;
 
-public class Superhero implements Serializable {
+public class Superhero implements Serializable{
+
+    @Serial
+    private static final long serialVersionUID = -1772422366595125179L;
+
     private String name;
     private String realName;
     private String superPower;
@@ -19,6 +24,14 @@ public class Superhero implements Serializable {
 
     public String getName() {
         return this.name;
+    }
+
+    public int getYearCreated() {
+        return this.yearCreated;
+    }
+
+    public double getStrength() {
+        return this.strength;
     }
 
     public void setName(String name) {

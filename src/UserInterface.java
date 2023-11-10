@@ -99,18 +99,58 @@ public class UserInterface {
     }
 
     public void showSuperheroListSorted(Controller controller) {
+        System.out.println("Choose the attribute to sort by: ");
+        System.out.println("1. Name");
+        System.out.println("2. Year Created");
+        System.out.println("3. Strength");
+        // Add more attributes as needed
+
+        int attributeChoice = getIntInput();
+
         List<Superhero> superheroList = controller.getAllSuperheroes();
+        sortSuperheroesByAttribute(superheroList, attributeChoice);
 
-        //Sort the superheroes by name
-        Collections.sort(superheroList, (s1, s2) -> s1.getName().compareToIgnoreCase(s2.getName()));
-
-        System.out.println("All the amazing superheroes: ");
+        System.out.println("All the amazing superheroes sorted by " + getAttributeName(attributeChoice) + ": ");
         for (Superhero superhero : superheroList) {
             if (superhero != null) {
                 System.out.println(superhero);
             }
         }
     }
+
+    private void sortSuperheroesByAttribute(List<Superhero> superheroList, int attributeChoice) {
+        switch (attributeChoice) {
+            case 1:
+                Collections.sort(superheroList, Comparator.comparing(Superhero::getName, String.CASE_INSENSITIVE_ORDER));
+                break;
+            case 2:
+                Collections.sort(superheroList, Comparator.comparingInt(Superhero::getYearCreated));
+                break;
+            case 3:
+                Collections.sort(superheroList, Comparator.comparingDouble(Superhero::getStrength));
+                break;
+            // Add more cases for other attributes
+            default:
+                System.out.println("Invalid attribute choice. Sorting by name by default.");
+                Collections.sort(superheroList, Comparator.comparing(Superhero::getName, String.CASE_INSENSITIVE_ORDER));
+                break;
+        }
+    }
+
+    private String getAttributeName(int attributeChoice) {
+        switch (attributeChoice) {
+            case 1:
+                return "Name";
+            case 2:
+                return "Year Created";
+            case 3:
+                return "Strength";
+            // Add more cases for other attributes
+            default:
+                return "Name";
+        }
+    }
+
 
     public void userSearchSuperhero(Database database) {
         System.out.println("Type the superhero name or part of the name of your superhero: ");
