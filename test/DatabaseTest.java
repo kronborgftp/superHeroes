@@ -98,19 +98,27 @@ class DatabaseTest {
 
 
         Superhero editedSpiderman = new Superhero("Spiderman", "Peter Parker", "Spider", 1964, true, 1000);
+        database.addSuperhero(editedSpiderman);
 
 
-        spiderman = editedSpiderman;
 
 
         // Get the updated superhero from the database
         List<Superhero> superheroes = database.getAllSuperheroes();
+        superheroes.remove(spiderman);
         assertEquals(3, superheroes.size());
         assertEquals(editedSpiderman, superheroes.get(2));
     }
 
     @Test
     void removeSuperhero() {
+
+        Superhero DonaldTrump = new Superhero("Donald", "Trump", "Manipulation", 500, false , 1);
+        database.addSuperhero(DonaldTrump);
+
+        List<Superhero> superheroes = database.getAllSuperheroes();
+        superheroes.remove(DonaldTrump);
+        assertEquals(2, superheroes.size());
 
     }
 
