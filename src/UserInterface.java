@@ -99,18 +99,22 @@ public class UserInterface {
     }
 
     public void showSuperheroListSorted(Controller controller) {
-        System.out.println("Choose the attribute to sort by: ");
-        System.out.println("1. Name");
-        System.out.println("2. Year Created");
-        System.out.println("3. Strength");
-        // Add more attributes as needed
+        System.out.println("Choose the primary attribute to sort by: ");
+        printAttributesMenu();
 
-        int attributeChoice = getIntInput();
+        int primaryAttributeChoice = getIntInput();
+
+        System.out.println("Choose the secondary attribute to sort by: ");
+        printAttributesMenu();
+
+        int secondaryAttributeChoice = getIntInput();
 
         List<Superhero> superheroList = controller.getAllSuperheroes();
-        sortSuperheroesByAttribute(superheroList, attributeChoice);
+        sortSuperheroesByMultipleAttributes(superheroList, primaryAttributeChoice, secondaryAttributeChoice);
 
-        System.out.println("All the amazing superheroes sorted by " + getAttributeName(attributeChoice) + ": ");
+        System.out.println("All the amazing superheroes sorted by " + getAttributeName(primaryAttributeChoice) +
+                " and then by " + getAttributeName(secondaryAttributeChoice) + ": ");
+
         for (Superhero superhero : superheroList) {
             if (superhero != null) {
                 System.out.println(superhero);
@@ -118,22 +122,34 @@ public class UserInterface {
         }
     }
 
-    private void sortSuperheroesByAttribute(List<Superhero> superheroList, int attributeChoice) {
+    private void printAttributesMenu() {
+        System.out.println("1. Name");
+        System.out.println("2. Year Created");
+        System.out.println("3. Strength");
+    }
+
+    private void sortSuperheroesByMultipleAttributes(List<Superhero> superheroList, int primaryAttribute, int secondaryAttribute) {
+        Collections.sort(superheroList, (s1, s2) -> {
+            int primaryComparison = compareAttributes(s1, s2, primaryAttribute);
+            if (primaryComparison == 0) {
+                // If primary attributes are the same, use secondary attribute for comparison
+                return compareAttributes(s1, s2, secondaryAttribute);
+            } else {
+                return primaryComparison;
+            }
+        });
+    }
+
+    private int compareAttributes(Superhero s1, Superhero s2, int attributeChoice) {
         switch (attributeChoice) {
             case 1:
-                Collections.sort(superheroList, Comparator.comparing(Superhero::getName, String.CASE_INSENSITIVE_ORDER));
-                break;
+                return s1.getName().compareToIgnoreCase(s2.getName());
             case 2:
-                Collections.sort(superheroList, Comparator.comparingInt(Superhero::getYearCreated));
-                break;
+                return Integer.compare(s1.getYearCreated(), s2.getYearCreated());
             case 3:
-                Collections.sort(superheroList, Comparator.comparingDouble(Superhero::getStrength));
-                break;
-            // Add more cases for other attributes
+                return Double.compare(s1.getStrength(), s2.getStrength());
             default:
-                System.out.println("Invalid attribute choice. Sorting by name by default.");
-                Collections.sort(superheroList, Comparator.comparing(Superhero::getName, String.CASE_INSENSITIVE_ORDER));
-                break;
+                return 0;
         }
     }
 
@@ -145,9 +161,8 @@ public class UserInterface {
                 return "Year Created";
             case 3:
                 return "Strength";
-            // Add more cases for other attributes
             default:
-                return "Name";
+                return "Unknown Attribute";
         }
     }
 
